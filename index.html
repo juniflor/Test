@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Pixel Fighter</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<style>html,body{margin:0;height:100%;background:#0b0b14;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+canvas{width:min(100vw,calc(100vh*16/9));aspect-ratio:16/9;image-rendering:pixelated;background:#000}
+/* on-screen controls (created by src/touch.js on touch devices only) */
+#touch{position:fixed;inset:0;pointer-events:none;z-index:5;--b:clamp(40px,13vmin,68px)}
+#touch b{pointer-events:auto;display:flex;align-items:center;justify-content:center;width:var(--b);height:var(--b);border-radius:50%;box-sizing:border-box;background:rgba(255,255,255,.16);border:2px solid rgba(255,255,255,.4);color:#fff;font:bold calc(var(--b)*.24) monospace;touch-action:none;-webkit-tap-highlight-color:transparent}
+#touch b.on{background:rgba(255,204,51,.6)}
+#touch .pad,#touch .acts{position:absolute;bottom:max(12px,env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(3,var(--b));grid-template-rows:repeat(3,var(--b));gap:2px}
+#touch .pad{left:max(12px,env(safe-area-inset-left));grid-template-areas:". u ." "l . r" ". d ."}
+#touch .acts{right:max(12px,env(safe-area-inset-right));grid-template-areas:". s ." "l . h" ". b ."}
+#touch .menu{position:absolute;bottom:max(8px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:auto;height:auto;padding:6px 14px;border-radius:14px;font-size:11px}
+#rot{display:none}
+@media (orientation:portrait){#rot{display:flex;position:fixed;inset:0;z-index:9;background:#0b0b14;color:#fff;align-items:center;justify-content:center;font:bold 18px monospace;text-align:center;padding:24px}}</style></head>
+<body><canvas id="c" width="480" height="270"></canvas>
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script><script type="module" src="/src/main.js"></script></body></html>
