@@ -3,6 +3,7 @@ import { Fighter, GROUND } from './fighter.js';
 import { drawFighter, drawStage, shadow } from './sprites.js';
 import { poll, pressed, held, hit, endFrame, padCount, padStatus, takeEvents, ACTIONS, PAD_ACTIONS, captureKey, capturePad, getKey, getPad, setKey, setPad, resetKey, resetPad, resetAll } from './input.js';
 import { makeAI, aiThink } from './ai.js';
+import { drawWithFx, drawParticles, drawWaves, drawOverlay, stepFx, announce as fxAnnounce, impact as fxImpact } from './comboFx.js';
 import { audio } from './audio.js';
 import './touch.js';
 
@@ -47,7 +48,8 @@ const any = a => pressed(0, a) || pressed(1, a);
 function startMatch() {
   const ids = [ROSTER[S.sel[0]], ROSTER[S.sel[1]]];
   M = { cpu: S.mode === 'cpu', ids, wins: [0, 0], round: 1, phase: 'intro', pt: 0, timer: 7200, fx_: [], projs: [], ai: makeAI(), msg: '', winner: -1, over: false,
-    sfx: n => audio.sfx(n),
+    sfx: n => audio.sfx(n), stop: 0, shake: 0, flash: null, banner: null, waves: [],
+    combo(att, cb) { fxAnnounce(this, att, cb); }, impact(att, mv, foe) { fxImpact(this, att, mv, foe); },
     fx(x, y, col, snd) { audio.sfx(snd); for (let i = 0; i < 8; i++) this.fx_.push({ x, y, vx: (Math.random() - .5) * 4, vy: (Math.random() - .7) * 3, l: 14, col }); },
     shoot(o, mv) { this.projs.push({ x: o.x + o.facing * 14, y: GROUND - o.y - o.def.h * .6, vx: o.facing * mv.speed, facing: o.facing, o, mv }); } };
   if (O) { M.cpu = false; M.frame = 0; M.loc = {}; M.pm = [0, 0]; O.rem = {}; for (let f = 0; f < DELAY; f++) { M.loc[f] = 0; O.rem[f] = 0; } lock = [false, false]; goT = 0; }
@@ -55,7 +57,7 @@ function startMatch() {
 }
 function newRound() {
   M.f = [new Fighter('p1', CHARACTERS[M.ids[0]], 150, 1), new Fighter('p2', CHARACTERS[M.ids[1]], 330, -1)];
-  M.f.forEach(f => f.def.id = f.def.id || null); M.timer = 7200; M.phase = 'intro'; M.pt = 0; M.projs = []; M.msg = 'ROUND ' + M.round;
+  M.f.forEach(f => f.def.id = f.def.id || null); M.stop = 0; M.flash = null; M.banner = null; M.waves = []; M.timer = 7200; M.phase = 'intro'; M.pt = 0; M.projs = []; M.msg = 'ROUND ' + M.round;
 }
 const intent = p => ({ left: held(p, 'left'), right: held(p, 'right'), up: held(p, 'up'), down: held(p, 'down'), block: held(p, 'block'),
   lightP: pressed(p, 'light'), heavyP: pressed(p, 'heavy'), specialP: pressed(p, 'special') });
@@ -71,13 +73,14 @@ function matchUpdate() {
   if (m.phase === 'intro' && m.pt > 100) { m.phase = 'fight'; m.pt = 0; m.msg = 'FIGHT!'; audio.sfx('beep'); }
   if (m.phase === 'fight' && m.pt > 50) m.msg = '';
   if (!O) { ia = intent(0); ib = m.cpu ? aiThink(m.ai, b, a) : intent(1); }
+  stepFx(m); if (m.stop > 0) { m.stop--; a.bufferInput(ia); b.bufferInput(ib); return; }   // hit-stop: freeze, but remember button presses
   a.update(ia, b, m); b.update(ib, a, m);
   const dx = b.x - a.x, ov = (a.def.w + b.def.w) / 2 - Math.abs(dx);
   if (ov > 0 && a.y < 30 && b.y < 30) { const s = dx >= 0 ? 1 : -1; a.x -= s * ov / 2; b.x += s * ov / 2; }
   for (const p of m.projs) { p.x += p.vx; const t = p.o === a ? b : a, h = t.hurt(), hs = (p.mv.size || 10) / 2;
     if (p.x + hs > h.l && p.x - hs < h.r && p.y + hs > h.t && p.y - hs < h.b) { p.dead = true; t.receive(p, p.mv, m); } if (p.x < -10 || p.x > 490) p.dead = true; }
   m.projs = m.projs.filter(p => !p.dead);
-  m.fx_.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += .15; p.l--; }); m.fx_ = m.fx_.filter(p => p.l > 0);
+  m.fx_.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += p.g ?? .15; p.l--; }); m.fx_ = m.fx_.filter(p => p.l > 0);
   if (m.phase === 'fight') { m.timer--; if (a.hp <= 0 || b.hp <= 0) endRound(true); else if (m.timer <= 0) endRound(false); }
   else if (m.phase === 'end' && m.pt > 150) {
     const w = m.wins.findIndex(x => x >= 2);
@@ -90,15 +93,19 @@ function drawHUD() {
     c.fillStyle = f.hp / f.def.hp > .3 ? '#3d6' : '#ee3'; const hw = w * Math.max(0, f.hp) / f.def.hp; c.fillRect(i ? x + w - hw : x, 16, hw, 8);
     txt((O ? (i === O.me ? 'YOU ' : 'OPP ') : i ? (m.cpu ? 'CPU ' : 'P2 ') : 'P1 ') + f.def.name, i ? x + w : x, 38, 8, '#fff', i ? 'right' : 'left');
     for (let k = 0; k < 2; k++) { c.fillStyle = k < m.wins[i] ? '#fc3' : '#333'; c.fillRect(i ? x + k * 10 : x + w - 8 - k * 10, 42, 8, 5); } });
+  m.f.forEach((f, i) => { const x = i ? 462 : 18, al = i ? 'right' : 'left';
+    if (f.hits >= 2 && f.hitsT > 0) txt(f.hits + ' HITS!', x, 66, 12, '#fc3', al);
+    if (f.comboName && f.comboT > 0) txt(f.comboName, x, 80, 9, '#fff', al); });
   txt(String(Math.ceil(m.timer / 60)).padStart(2, '0'), 240, 28, 16, '#fff');
   if (m.msg) txt(m.msg, 240, 110, 24, '#fc3');
   if (paused) txt('PAUSED  (P resume, Esc quit)', 240, 140, 10);
 }
 function drawMatch() {
-  drawStage(c); M.f.forEach(f => shadow(c, f));
-  const order = M.f[0].state === 'lose' ? [0, 1] : [1, 0]; order.forEach(i => drawFighter(c, M.f[i]));
+  c.save(); if (M.shake > 0) c.translate(Math.round((Math.random() - .5) * M.shake), Math.round((Math.random() - .5) * M.shake));
+  drawStage(c); M.f.forEach(f => shadow(c, f)); drawWaves(c, M);
+  const order = M.f[0].state === 'lose' ? [0, 1] : [1, 0]; order.forEach(i => drawWithFx(c, M.f[i], drawFighter));
   M.projs.forEach(p => { const z = p.mv.size || 10; c.globalAlpha = z > 10 ? .75 : 1; c.fillStyle = p.mv.col; c.fillRect(p.x - z / 2, p.y - z * .4, z, z * .8); c.fillStyle = '#fff'; c.fillRect(p.x - 2, p.y - 2, 4, 4); c.globalAlpha = 1; });
-  M.fx_.forEach(p => { c.fillStyle = p.col; c.fillRect(p.x, p.y, 3, 3); }); drawHUD();
+  drawParticles(c, M.fx_); c.restore(); drawOverlay(c, M); drawHUD();
 }
 function drawList(y) { LISTS[scene]().forEach((s, i) => txt((i === sel ? '> ' : '  ') + s + (i === sel ? ' <' : '  '), 240, y + i * 22 + 12, 12, i === sel ? '#fc3' : '#fff')); }
 function menuNav() {

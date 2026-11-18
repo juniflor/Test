@@ -48,3 +48,13 @@ On phones and tablets (touch screens) on-screen controls appear automatically: D
 
 ## v1.4: remap controls
 Main menu > **REMAP CONTROLS**. Two pages (Tab switches): **Keyboard** (every action for P1 and P2) and **Gamepad** (punch, kick, special, jump, block; stick/d-pad always move). Up/Down pick a row, Left/Right switch player, Enter (or the punch button) then press the new key/button, Del resets one binding, Esc cancels or leaves. Clicking a row works too. If you pick a key that's already used, the two actions swap. Reserved keys: Esc, Enter, Tab, P (pause), M (sound); gamepad Back/Select swaps player slots. Bindings are saved in the browser (localStorage) and shown on the CONTROLS screen. Online play uses your own bindings, and your opponent never needs the same ones.
+
+## v1.5: combos
+Chain combos for every fighter (`src/combos.js`). When a move **connects** (not blocked) you can cancel it into the next move; presses are buffered for 10 frames, so you can mash. Default chains: Light -> Light / Heavy / low light / Special, low light -> low light / sweep / Light / Heavy, Heavy -> Special. Finish a chain with the right sequence and the last move becomes a **finisher** (bonus damage, knockback or launch) with its name shown under the health bar, plus a HITS counter. Later moves in a chain do slightly less damage, and chains max out at 6 moves. Button maps are unchanged.
+Fighters have 3 combos each. Sam Li can also chain kick into kick (Light, Heavy, Heavy, Heavy = Tornado Kick). Edit `COMBOS` in `src/combos.js` to change them: `seq` (move keys), `dmg`/`kb` multipliers, `launch`, `final`. The CPU chains and goes for combos too.
+
+## Combos and finisher animations
+Chain cancels live in `src/combos.js`: when a move connects you can cancel into the next one, and finishing one of a fighter's listed sequences makes the last move a FINISHER (bonus damage, launch, name banner).
+- Light, Light, Heavy is the basic string; each fighter has three combos (crouch strings, special finishers, Sam Li's kick strings).
+- Holding DOWN the whole time works for crouch combos. You also get 6 extra frames after a move ends to keep a combo going, and button presses are buffered for 14 frames (also during hit-stop).
+- Every combo has its own finisher animation, set with `anim` (`spin`, `flip`, `rush`, `slam`, `burst`, `shake`), `col`, `fx` (`star`, `gas`, `bolt`, `flame`, `dust`) and optional `turns`, `lift`, `shake`, `stop` in `src/combos.js`. The effects (afterimage trails, aura, hit-stop, screen shake, flash, shockwave, particles, banner) are in `src/comboFx.js`.

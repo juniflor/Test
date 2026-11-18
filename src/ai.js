@@ -6,6 +6,8 @@ export function aiThink(ai, me, foe) {
     ai.mode = d > 120 ? (r < .75 ? 'approach' : 'special') : d > 55 ? (r < .6 ? 'approach' : r < .75 ? 'special' : 'attack') :
       (r < .55 ? 'attack' : r < .75 ? 'retreat' : r < .9 ? 'block' : 'approach'); }
   const foeAtk = ['light', 'heavy', 'special', 'clight', 'cheavy', 'jlight', 'jheavy'].includes(foe.state);
+  if (me.conf && Math.random() < .1) { const o = me.options(); if (o.length) { const pool = me.hint(o), k = pool[Math.random() * pool.length | 0]; // keep the combo going
+    i.down = k[0] === 'c'; if (k === 'special') i.specialP = true; else if (k.endsWith('light')) i.lightP = true; else i.heavyP = true; return i; } }
   if (me.y > 0 && d < 70 && Math.random() < .1) { if (Math.random() < .5) i.lightP = true; else i.heavyP = true; return i; }
   if (ai.blk <= 0 && foeAtk && d < 65 && foe.t < 6 && Math.random() < .4) ai.blk = 20 + Math.random() * 15;
   if (ai.blk > 0) { ai.blk--; i.block = true; return i; }

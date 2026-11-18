@@ -24,10 +24,10 @@ Object.assign(CHARACTERS, {
     light: { s: 6, a: 3, r: 10, dmg: 6, kb: 2.5, hs: 14, reach: 26, y: 16, h: 14, snd: 'light' },
     heavy: { s: 13, a: 4, r: 20, dmg: 12, kb: 6, hs: 24, reach: 34, y: 20, h: 18, snd: 'heavy' },
     special: { s: 10, a: 22, r: 14, dmg: 17, kb: 6, hs: 26, reach: 34, y: 14, h: 32, dash: 3.5, hop: 6, flop: true, snd: 'special' } }), // belly flop
-  esa: mk([6, 7, 7], { name: 'ESA', h: 42, w: 20, leg: 15, torso: 15, lw: 7, skin: '#e09a5c', hair: '#3b2418', top: '#e87a90', topD: '#b8546a',
+  esa: mk([6, 7, 7], { name: 'ESA', h: 56, w: 20, leg: 15, torso: 15, lw: 7, skin: '#e09a5c', hair: '#3b2418', top: '#e87a90', topD: '#b8546a',
     pants: '#5f7fb0', shoes: '#ffffff', style: 'shoulder', hood: false, shortSleeve: true }, {
-    light: { s: 5, a: 3, r: 9, dmg: 5, kb: 2, hs: 13, reach: 30, y: 12, h: 12, snd: 'light' },
-    heavy: { s: 10, a: 4, r: 16, dmg: 10, kb: 4, hs: 20, reach: 36, y: 18, h: 12, snd: 'heavy' },
+    light: { s: 5, a: 3, r: 9, dmg: 5, kb: 2, hs: 13, reach: 30, y: 14, h: 12, snd: 'light' },
+    heavy: { s: 10, a: 4, r: 16, dmg: 10, kb: 4, hs: 20, reach: 36, y: 22, h: 12, snd: 'heavy' },
     special: { type: 'proj', s: 14, r: 26, dmg: 12, kb: 3, hs: 28, speed: 2.6, col: '#5c4', size: 18, snd: 'special' } }), // green gas
   sydney: mk([8, 7, 6], { name: 'SYDNEY', h: 66, w: 22, leg: 18, torso: 18, skin: '#d49a6a', hair: '#6b4226', top: '#8b5a2b', topD: '#6b4220',
     pants: '#3d6fb5', rips: true, shoes: '#222222', style: 'ponytail', hood: false }, {
@@ -73,7 +73,7 @@ Object.assign(CHARACTERS.sydney, { detail: true, body: { leg: 16, arm: 12, torso
 Object.assign(CHARACTERS.mom, { detail: true, body: { leg: 14, arm: 11, torso: 19, w: .9 }, pal: { ol: '#0b0b16', skin: '#d9a07a', skinS: '#b87a58', hair: '#3a2a24', hairH: '#6a4c40',
   lowGuard: true, noHoodie: true, neckKey: 'hood', skirt: true, puff: true, belt: true, bob: true, smile: true,
   hood: '#7a1f3d', hoodL: '#9d3558', hoodD: '#551229', hoodDD: '#3a0c1c', red: '#241a1a', blk: '#14100f', sole: '#14100f', white: '#f4eee8', eye: '#15151c', mouth: '#b83a4a' } });
-Object.assign(CHARACTERS.esa, { detail: true, body: { leg: 10, arm: 10, torso: 13, w: .9 }, pal: { ol: '#1a0f12', skin: '#e09a5c', skinS: '#b9753f', hair: '#3b2418', hairH: '#6e4a32',   // long wavy brown hair, pink tee, baggy jeans, white sneakers
+Object.assign(CHARACTERS.esa, { detail: true, body: { leg: 13, arm: 11, torso: 17, w: .9 }, pal: { ol: '#1a0f12', skin: '#e09a5c', skinS: '#b9753f', hair: '#3b2418', hairH: '#6e4a32',   // long wavy brown hair, pink tee, baggy jeans, white sneakers
   lowGuard: true, noHoodie: true, neckKey: 'skin', wavy: true, shortHair: true, shortSleeve: true, baggy: true, smile: true,
   hood: '#e87a90', hoodL: '#f59aac', hoodD: '#bd5670', hoodDD: '#8c3a50', jean: '#5f7fb0', jeanH: '#8aa3cc', jeanD: '#3f5580',
   red: '#f2edf4', blk: '#c4bace', sole: '#a89fb4', white: '#ffffff', eye: '#1b1214', mouth: '#a8443f' } });
