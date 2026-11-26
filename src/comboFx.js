@@ -4,7 +4,7 @@
 //   col:  colour of aura / flash / shockwave / particles          fx: 'star' | 'gas' | 'bolt' | 'flame' | 'dust'  particle style
 //   turns, lift (spin only), shake (screen shake), stop (hit-stop frames) are optional.
 import { GROUND, ATK } from './fighter.js';
-const TAU = Math.PI * 2, TRAIL = new Set(['rush', 'flip', 'spin']);
+const TAU = Math.PI * 2, TRAIL = new Set(['rush', 'flip', 'spin', 'juke']);
 
 export function poseFx(f) {              // transform for the attacker's body, or null
   const cb = f.cur && f.cur.combo; if (!cb || !cb.anim || !ATK.includes(f.state)) return null;
@@ -13,7 +13,8 @@ export function poseFx(f) {              // transform for the attacker's body, o
     case 'spin': return { rot: fc * TAU * (cb.turns || 1) * p, dy: -(cb.lift || 0) * Math.sin(Math.PI * p) };
     case 'flip': return { rot: -fc * TAU * p, dy: -16 * Math.sin(Math.PI * p) };
     case 'rush': return { rot: fc * .22, dx: fc * 3 * Math.sin(Math.PI * p) };
-    case 'slam': return p < .45 ? { dy: -16 * (p / .45), sy: 1.1 } : p < .65 ? { dy: -16 * (1 - (p - .45) / .2) } : { sy: .84 };
+    case 'juke': return { dx: fc * 9 * Math.sin(p * TAU * 1.5), rot: fc * .1 };   // crossover shuffle
+    case 'slam': { const L = cb.lift || 16; return p < .45 ? { dy: -L * (p / .45), sy: 1.1 } : p < .65 ? { dy: -L * (1 - (p - .45) / .2) } : { sy: .84 }; }   // lift = jump height
     case 'burst': { const s = 1 + .1 * Math.sin(p * TAU * 1.5); return { sx: s, sy: s }; }
     case 'shake': return { dx: (Math.random() - .5) * 3, dy: (Math.random() - .5) * 2 };
   } return null;
@@ -37,6 +38,7 @@ export function burst(m, x, y, kind, col, n = 16) {
     const p = { x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 1, l: 22 + (Math.random() * 14 | 0), col, k: kind, g: .12 };
     if (kind === 'gas') { p.vx *= .5; p.vy = -Math.random() * 1.2; p.g = -.02; p.l += 20; }
     if (kind === 'flame') { p.vx *= .5; p.vy = -1 - Math.random() * 2; p.g = -.05; }
+    if (kind === 'note') { p.vx *= .5; p.vy = -1 - Math.random() * 1.5; p.g = -.03; p.l += 14; }
     if (kind === 'dust') { p.vy = -Math.random() * 1.5; p.g = .05; p.vx *= 1.4; }
     m.fx_.push(p); }
 }
@@ -61,6 +63,8 @@ export function drawParticles(c, list) {
       case 'bolt': c.fillRect(x, y - 4, 2, 4); c.fillRect(x + 2, y - 1, 2, 4); c.fillStyle = '#fff'; c.fillRect(x, y - 3, 1, 2); break;
       case 'flame': c.fillRect(x - 2, y - 2, 4, 4); c.fillStyle = '#ffe27a'; c.fillRect(x - 1, y - 1, 2, 2); break;
       case 'dust': c.fillRect(x - 2, y - 2, 4, 3); break;
+      case 'ball': c.fillRect(x - 2, y - 2, 5, 5); c.fillStyle = '#4a2008'; c.fillRect(x - 2, y, 5, 1); c.fillRect(x, y - 2, 1, 5); break;
+      case 'note': c.fillRect(x, y, 3, 2); c.fillRect(x + 2, y - 5, 1, 6); c.fillRect(x + 3, y - 5, 3, 1); break;
       default: c.fillRect(x, y, 3, 3); } }
   c.globalAlpha = 1;
 }

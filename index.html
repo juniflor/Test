@@ -9,7 +9,7 @@ canvas{width:min(100vw,calc(100vh*16/9));aspect-ratio:16/9;image-rendering:pixel
 #touch b.on{background:rgba(255,204,51,.6)}
 #touch .pad,#touch .acts{position:absolute;bottom:max(12px,env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(3,var(--b));grid-template-rows:repeat(3,var(--b));gap:2px}
 #touch .pad{left:max(12px,env(safe-area-inset-left));grid-template-areas:". u ." "l . r" ". d ."}
-#touch .acts{right:max(12px,env(safe-area-inset-right));grid-template-areas:". s ." "l . h" ". b ."}
+#touch .acts{right:max(12px,env(safe-area-inset-right));grid-template-areas:". s t" "l . h" ". b ."}
 #touch .menu{position:absolute;bottom:max(8px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:auto;height:auto;padding:6px 14px;border-radius:14px;font-size:11px}
 #rot{display:none}
 @media (orientation:portrait){#rot{display:flex;position:fixed;inset:0;z-index:9;background:#0b0b14;color:#fff;align-items:center;justify-content:center;font:bold 18px monospace;text-align:center;padding:24px}}</style></head>

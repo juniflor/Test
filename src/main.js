@@ -104,7 +104,9 @@ function drawMatch() {
   c.save(); if (M.shake > 0) c.translate(Math.round((Math.random() - .5) * M.shake), Math.round((Math.random() - .5) * M.shake));
   drawStage(c); M.f.forEach(f => shadow(c, f)); drawWaves(c, M);
   const order = M.f[0].state === 'lose' ? [0, 1] : [1, 0]; order.forEach(i => drawWithFx(c, M.f[i], drawFighter));
-  M.projs.forEach(p => { const z = p.mv.size || 10; c.globalAlpha = z > 10 ? .75 : 1; c.fillStyle = p.mv.col; c.fillRect(p.x - z / 2, p.y - z * .4, z, z * .8); c.fillStyle = '#fff'; c.fillRect(p.x - 2, p.y - 2, 4, 4); c.globalAlpha = 1; });
+  M.projs.forEach(p => { const z = p.mv.size || 10; c.globalAlpha = z > 10 ? .75 : 1; c.fillStyle = p.mv.col; c.fillRect(p.x - z / 2, p.y - z * .4, z, z * .8); if (p.mv.ball) { c.fillStyle = '#4a2008'; c.fillRect(p.x - z / 2, p.y - 1, z, 1); c.fillRect(p.x - 1, p.y - z * .4, 1, z * .8); }   // basketball seams
+    else if (p.mv.ring) { c.strokeStyle = '#fff'; c.lineWidth = 1; c.strokeRect(Math.round(p.x - z / 2) + .5, Math.round(p.y - z * .4) + .5, z - 1, z * .8 - 1); c.strokeRect(Math.round(p.x - z / 4) + .5, Math.round(p.y - z * .2) + .5, z / 2 - 1, z * .4 - 1); }   // sound-wave rings
+    else { c.fillStyle = '#fff'; c.fillRect(p.x - 2, p.y - 2, 4, 4); } c.globalAlpha = 1; });
   drawParticles(c, M.fx_); c.restore(); drawOverlay(c, M); drawHUD();
 }
 function drawList(y) { LISTS[scene]().forEach((s, i) => txt((i === sel ? '> ' : '  ') + s + (i === sel ? ' <' : '  '), 240, y + i * 22 + 12, 12, i === sel ? '#fc3' : '#fff')); }
@@ -184,15 +186,15 @@ function drawControls() {
   drawStage(c); c.fillStyle = 'rgba(0,0,0,.65)'; c.fillRect(30, 20, 420, 230); txt('CONTROLS', 240, 44, 16, '#fc3');
   [`P1: ${k(0, 'left')}/${k(0, 'right')} move  ${k(0, 'up')} jump  ${k(0, 'down')} crouch  ${k(0, 'light')} punch  ${k(0, 'heavy')} kick  ${k(0, 'special')} special  ${k(0, 'block')} block`,
    `P2: ${k(1, 'left')}/${k(1, 'right')} move  ${k(1, 'up')} jump  ${k(1, 'down')} crouch  ${k(1, 'light')} punch  ${k(1, 'heavy')} kick  ${k(1, 'special')} special  ${k(1, 'block')} block`,
-   'Gamepads auto-assign (pad1=P1, pad2=P2); Back/Select swaps; mix with keyboard', `Pad: stick/d-pad move  ${pb('light')} punch  ${pb('heavy')} kick  ${pb('special')} special  ${pb('up')} jump  ${pb('block')} block`, 'P pause   M sound   Esc back', 'Win 2 of 3 rounds. 2 min per round.', 'Light=punch, Heavy=kick. Hold DOWN: low punch / sweep. In air: flying punch / kick', 'Press any key / click to return']
-    .forEach((s, i) => txt(s, 240, 76 + i * 20, 8));
+   'Gamepads auto-assign (pad1=P1, pad2=P2); Back/Select swaps; mix with keyboard', `Pad: stick/d-pad move  ${pb('light')} punch  ${pb('heavy')} kick  ${pb('special')} special  ${pb('up')} jump  ${pb('block')} block`, 'P pause   M sound   Esc back', 'Win 2 of 3 rounds. 2 min per round.', 'THROW = punch + kick together (beats block, slow to recover)', 'Light=punch, Heavy=kick. Hold DOWN: low punch / sweep. In air: flying punch / kick', 'Press any key / click to return']
+    .forEach((s, i) => txt(s, 240, 74 + i * 19, 8));
   if (hit('Escape') || hit('Enter') || hit('Space') || any('light')) go('menu');
 }
 const toasts = [];
 function frame() {
   poll(); for (const e of takeEvents()) { toasts.push({ s: e.text, t: 240 }); if (e.type === 'off' && scene === 'match' && !O) paused = true; } if (hit('KeyM')) { S.sound = !S.sound; audio.setOn(S.sound); save(); }
   if (scene === 'match') { matchUpdate(); if (scene === 'match') drawMatch(); }
-  if (scene === 'menu') { drawStage(c); txt('PIXEL FIGHTER', 240, 70, 28, '#fc3'); txt('JUNIOR vs MARTY', 240, 92, 10, '#7ef'); txt('build 1.4.0 (online + touch + remap)', 240, 106, 7, '#aaa'); drawList(128); menuNav(); }
+  if (scene === 'menu') { drawStage(c); txt('PIXEL FIGHTER', 240, 70, 28, '#fc3'); txt('JUNIOR vs MARTY', 240, 92, 10, '#7ef'); txt('build 1.7.0 (Kuya D + Sherell)', 240, 106, 7, '#aaa'); drawList(128); menuNav(); }
   else if (scene === 'versus') { drawStage(c); txt('VERSUS MODE', 240, 70, 20, '#fc3'); drawList(128); menuNav(); }
   else if (scene === 'online') { drawStage(c); txt('PLAY ONLINE', 240, 70, 20, '#fc3'); txt('Host a room, share the code or link', 240, 92, 8, '#7ef'); drawList(128); menuNav(); }
   else if (scene === 'lobby') { drawLobby(); }

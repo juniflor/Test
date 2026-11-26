@@ -25,7 +25,7 @@ export const CHAIN = {
   cheavy: [], special: [], jlight: [], jheavy: [],
 };
 
-// Fighters are looked up by name: lowercase, letters only ("Sam Li" -> "samli").
+// Fighters are looked up by name: lowercase, letters only ("Sami" -> "sami").
 // Add a new fighter by adding an entry here. Anyone not listed uses `default`.
 export const COMBOS = {
   default: { combos: [
@@ -64,11 +64,11 @@ export const COMBOS = {
     { name: 'RAPID FINISH', seq: ['light', 'heavy', 'special'], dmg: 1.5, final: true, anim: 'shake', col: '#f93', fx: 'star', shake: 7 },
   ] },
 
-  // Sam Li can chain kicks into kicks (spinning kick strings).
-  samli: { repeat: ['light', 'clight', 'heavy'], chain: { heavy: ['heavy', 'special'] }, combos: [
-    { name: 'SPIN CYCLE', seq: ['light', 'heavy', 'heavy'], dmg: 1.3, kb: 1.3, anim: 'spin', turns: 1, col: '#f8f', fx: 'star' },
-    { name: 'TORNADO KICK', seq: ['light', 'heavy', 'heavy', 'heavy'], dmg: 1.7, launch: 6, final: true, anim: 'spin', turns: 2, lift: 10, col: '#f8f', fx: 'dust', shake: 9 },
-    { name: 'DRAGON SPIN', seq: ['light', 'heavy', 'special'], dmg: 1.5, final: true, anim: 'spin', turns: 2, lift: 6, col: '#f63', fx: 'flame', stop: 9, shake: 10 },
+  // Sami can chain kicks into kicks (spinning kick strings).
+  sami: { repeat: ['light', 'clight', 'heavy'], chain: { heavy: ['heavy', 'special'] }, combos: [
+    { name: 'SPIN CYCLE', seq: ['light', 'heavy', 'heavy'], dmg: 1.2, kb: 1.3, anim: 'spin', turns: 1, col: '#f8f', fx: 'star' },
+    { name: 'TORNADO KICK', seq: ['light', 'heavy', 'heavy', 'heavy'], dmg: 1.3, launch: 6, final: true, anim: 'spin', turns: 2, lift: 10, col: '#f8f', fx: 'dust', shake: 9 },
+    { name: 'DRAGON SPIN', seq: ['light', 'heavy', 'special'], dmg: 1.3, final: true, anim: 'spin', turns: 2, lift: 6, col: '#f63', fx: 'flame', stop: 9, shake: 10 },
   ] },
 
   edson: { combos: [
@@ -81,6 +81,20 @@ export const COMBOS = {
     { name: 'MOM KNOWS BEST', seq: ['light', 'light', 'special'], dmg: 1.5, final: true, anim: 'shake', col: '#ff4', fx: 'bolt', shake: 6 },
     { name: 'GROUNDED', seq: ['clight', 'light', 'heavy'], dmg: 1.4, launch: 5, final: true, anim: 'slam', col: '#ff4', fx: 'bolt', shake: 8 },
     { name: 'TIME OUT', seq: ['light', 'heavy', 'special'], dmg: 1.6, final: true, anim: 'burst', col: '#ff4', fx: 'bolt', stop: 10, shake: 9 },
+  ] },
+
+  // Kuya D: basketball moves
+  kuyad: { combos: [
+    { name: 'CROSSOVER', seq: ['light', 'light', 'heavy'], dmg: 1.3, kb: 1.6, anim: 'juke', col: '#f80', fx: 'ball' },
+    { name: 'DUNKED ON', seq: ['clight', 'light', 'heavy'], dmg: 1.5, launch: 6, final: true, anim: 'slam', lift: 30, col: '#f55', fx: 'ball', shake: 11, stop: 9 },
+    { name: 'HARD PASS', seq: ['light', 'heavy', 'special'], dmg: 1.6, final: true, anim: 'rush', col: '#f80', fx: 'ball', shake: 8, stop: 9 },
+  ] },
+
+  // Sherell: music + acting
+  sherell: { combos: [
+    { name: 'SONIC SCREAM', seq: ['light', 'light', 'special'], dmg: 1.5, final: true, anim: 'burst', col: '#6df', fx: 'note', shake: 6 },
+    { name: 'OVERREHEARSAL', seq: ['light', 'light', 'heavy'], dmg: 1.3, kb: 1.3, hs: 6, anim: 'shake', col: '#f9c', fx: 'star' },
+    { name: 'GRAND FINALE', seq: ['light', 'heavy', 'special'], dmg: 1.6, final: true, anim: 'spin', turns: 1, lift: 8, col: '#fd5', fx: 'star', stop: 10, shake: 9 },
   ] },
 };
 

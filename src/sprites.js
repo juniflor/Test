@@ -40,6 +40,8 @@ export function drawFighter(c, f, force) {
   if (S === 'win') { R(c, 4, sy - 12, 4, 12, d.top); R(c, 4, sy - 16, 4, 4, d.skin); R(c, -8, sy - 12, 4, 12, d.top); R(c, -8, sy - 16, 4, 4, d.skin); }
   else if (S === 'block') { R(c, 5 + lean, sy - 6, 5, 12, d.top); R(c, 5 + lean, sy - 9, 5, 4, d.skin); }
   else if (S === 'lose') { arm(-6, 8, sy + 2, d.top); }
+  else if (S === 'throw') { if (f.t >= mv.s && f.t < mv.s + mv.a + 12) { R(c, 4, sy - 14, 4, 14, d.top); R(c, 4, sy - 18, 4, 4, d.skin); R(c, -6, sy - 14, 4, 14, d.topD); R(c, -6, sy - 18, 4, 4, d.skin); }
+    else { const len = f.t < mv.s ? 6 + Math.round(8 * f.t / mv.s) : 10; arm(2 + lean, len, sy + 2, d.top); arm(-3, len - 2, sy + 4, d.topD); } }
   else if (ATK.includes(S) && !kick) { const len = f.t < mv.s ? 4 : act ? mv.reach - 4 - (mv.every && (f.t / 3 | 0) % 2 ? 6 : 0) : 9; arm(2 + lean, len, sy + (S === 'special' ? 0 : 1), d.top); arm(-4, S === 'special' ? len : 6, sy + 3, d.topD); }
   else if (S === 'hit') { arm(-8, 6, sy + 4, d.top); }
   else { arm(3 + lean, 8, sy + 3, d.top); arm(-5, 6, sy + 4, d.topD); }
