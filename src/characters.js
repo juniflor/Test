@@ -59,6 +59,11 @@ Object.assign(CHARACTERS, {
     light: { s: 4, a: 3, r: 8, dmg: 5, kb: 2.2, hs: 13, reach: 27, y: 14, h: 12, snd: 'light' },
     heavy: { s: 9, a: 4, r: 15, dmg: 10, kb: 4.5, hs: 21, reach: 34, y: 24, h: 14, snd: 'heavy' },
     special: { s: 4, a: 15, r: 14, dmg: 3, kb: 1, hs: 12, reach: 30, y: 14, h: 14, every: 3, jabs: true, snd: 'light' } }),   // quick punches
+  // Auntie Sheila: teacher. Quick and balanced (speed 9, attack 7, health 7). Special: throws a red-pen "F" test paper.
+  auntiesheila: mk([9, 7, 7], { name: 'AUNTIE SHEILA', h: 62, w: 20, leg: 15, torso: 18, skin: '#d9a47c', hair: '#4a2c20', top: '#9a9aa4', topD: '#767680', pants: '#4a6aa0', shoes: '#f2f2f2', style: 'straight', glasses: true, hood: false }, {
+    light: { s: 3, a: 3, r: 7, dmg: 5, kb: 2, hs: 13, reach: 27, y: 14, h: 12, snd: 'light' },
+    heavy: { s: 8, a: 4, r: 14, dmg: 10, kb: 4, hs: 20, reach: 34, y: 24, h: 14, snd: 'heavy' },
+    special: { type: 'proj', s: 9, r: 18, dmg: 12, kb: 4, hs: 22, speed: 6.5, col: '#ffffff', size: 12, slip: true, snd: 'special' } }),   // graded test paper
   // Sherell: same strength/speed/health as Esa. Music + acting powers: the special is a sonic scream.
   sherell: mk([6, 7, 7], { name: 'SHERELL', h: 58, w: 20, leg: 15, torso: 13, skin: '#c89468', hair: '#16110f', top: '#9b9ba3', topD: '#7b7b85', pants: '#4a72b0', shoes: '#f2edf4', style: 'straight' }, {
     light: { s: 5, a: 3, r: 9, dmg: 5, kb: 2, hs: 13, reach: 29, y: 12, h: 12, snd: 'light' },
@@ -122,4 +127,9 @@ Object.assign(CHARACTERS.dandy, { detail: true, body: { leg: 15, arm: 12, torso:
   lowGuard: true, noHoodie: true, neckKey: 'skin', crew: true, smile: true, shades: true, frame: '#0a0a0e', lens: '#14141c',
   hood: '#1d2a4d', hoodL: '#33477a', hoodD: '#141d38', hoodDD: '#0d1426', jean: '#16161c', jeanH: '#34343f', jeanD: '#0b0b10',
   red: '#f2f2f2', blk: '#c9c9d2', sole: '#a8a8b4', white: '#ffffff', eye: '#15151c', mouth: '#7a3a2a' } });
+// Auntie Sheila: long straight dark-brown hair, teal-framed tinted glasses, grey zip hoodie, gold chain, blue jeans, white sneakers
+Object.assign(CHARACTERS.auntiesheila, { detail: true, body: { leg: 15, arm: 11.5, torso: 18, w: .85 }, pal: { ol: '#0b0a10', skin: '#d9a47c', skinS: '#b5805a', hair: '#4a2c20', hairH: '#7a4c34', hairE: '#5a3626', lowGuard: true,
+  straight: true, glasses: true, smile: true, zip: true, frame: '#2f9a98', lens: '#9a94bc', gold: '#e2b84a',
+  hood: '#9a9aa4', hoodL: '#bdbdc6', hoodD: '#767680', hoodDD: '#5a5a64', jean: '#4a6aa0', jeanH: '#7a9ad0', jeanD: '#2f4a7a', stringKey: 'hoodL',
+  red: '#f2f2f2', blk: '#c9c9d2', sole: '#a8a8b4', white: '#ffffff', eye: '#15151c', mouth: '#a8504a' } });
 export const ROSTER = Object.keys(CHARACTERS);

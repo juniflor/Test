@@ -83,6 +83,7 @@ export function drawDetailed(c, f, force) {
     if (!ol) { limb([hip[0] - 4, hip[1] - 2], [nx - 4, ny + 2], 4, 'hoodD'); limb([hip[0] + 3, hip[1] - 4], [nx + 3, ny + 5], 2, 'hoodL');
       if (!P.bare && !P.noHoodie) { r(hip[0] - Math.round(6 * W), hip[1] - 1, w12, 3, 'hoodD'); r(hip[0] - Math.round(4 * W) + lean * .3, hip[1] - 9, Math.round(9 * W), 6, 'hoodD'); r(hip[0] - Math.round(4 * W) + lean * .3, hip[1] - 9, Math.round(9 * W), 1, 'hoodDD');
       const sk = P.emblem ? 'hoodD' : P.stringKey || 'white'; r(nx - 1, ny + 4, 1, 6, sk); r(nx + 3, ny + 4, 1, 6, sk); if (P.emblem) r(nx, ny + 6, 5, 5, 'emblem'); } }
+    if (P.zip && !ol) { r(nx + 3, ny + 3, 1, B.torso - 5, 'hoodDD'); r(nx + 2, ny + 2, 1, 1, 'gold'); r(nx + 3, ny + 3, 1, 1, 'gold'); r(nx + 4, ny + 4, 1, 1, 'gold'); r(nx + 3, ny + 5, 1, 1, 'gold'); r(nx + 2, ny + 6, 1, 1, 'gold'); }   // zip-up front and gold chain
     if (P.graphic && !ol) { const gx = nx - 8, gy = ny + 4; r(gx, gy, 16, 8, 'gSky');   // landscape tee print across the chest (mountains, lake, pines); the near arm covers its middle
       for (const [pk, hw] of [[4, 4], [11, 3]]) for (let k = 0; k < hw; k++) r(gx + pk - k, gy + 1 + k, 2 * k + 1, 1, 'gMtn'); r(gx + 1, gy + 5, 14, 1, 'gMtn'); r(gx, gy + 5, 16, 3, 'gLake');
       for (const px of [3, 12]) { r(gx + px, gy + 3, 1, 1, 'gPine'); r(gx + px - 1, gy + 4, 3, 1, 'gPine'); r(gx + px - 2, gy + 5, 5, 1, 'gPine'); r(gx + px, gy + 6, 1, 1, 'gPine'); } }
