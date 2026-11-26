@@ -92,8 +92,8 @@ export const COMBOS = {
 
   // Uncle Dandy: basketball + Uber
   uncledandy: { combos: [
-    { name: 'BANK SHOT', seq: ['light', 'light', 'heavy'], dmg: 1.3, kb: 1.5, anim: 'flip', col: '#f80', fx: 'ball' },
-    { name: 'SAY UNCLE', seq: ['clight', 'light', 'heavy'], dmg: 1.5, launch: 6, final: true, anim: 'slam', lift: 14, col: '#fd5', fx: 'star', shake: 10, stop: 9 },
+    { name: 'BANK SHOT', seq: ['clight', 'light', 'heavy'], dmg: 1.3, kb: 1.5, anim: 'flip', col: '#f80', fx: 'ball' },
+    { name: 'SAY UNCLE', seq: ['light', 'light', 'heavy'], dmg: 1.5, launch: 6, final: true, anim: 'slam', lift: 14, col: '#fd5', fx: 'star', shake: 10, stop: 9 },
     { name: 'UBER ATTACK', seq: ['light', 'heavy', 'special'], dmg: 1.6, final: true, anim: 'rush', col: '#ffffff', fx: 'pin', shake: 9, stop: 9 },
   ] },
 
