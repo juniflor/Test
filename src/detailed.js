@@ -104,7 +104,7 @@ export function drawDetailed(c, f, force) {
       if (P.glasses && P.rect) { r(hx + 4, hy + 2, 6, 5, 'frame'); r(hx + 5, hy + 3, 4, 3, 'lens'); r(hx + 7, hy + 4, 2, 2, 'eye'); r(hx + 1, hy + 3, 3, 1, 'frame'); }   // black rectangular glasses
       else if (P.glasses && P.round) { r(hx + 4, hy + 3, 6, 5, 'frame'); r(hx + 5, hy + 4, 4, 3, 'lens'); r(hx + 7, hy + 5, 2, 2, 'eye'); r(hx + 4, hy + 3, 1, 1, 'skin'); r(hx + 9, hy + 3, 1, 1, 'skin'); r(hx + 4, hy + 7, 1, 1, 'skin'); r(hx + 9, hy + 7, 1, 1, 'skin'); r(hx + 1, hy + 4, 3, 1, 'frame'); }   // thin round wire glasses
       else if (P.glasses) { r(hx + 4, hy + 3, 6, 6, 'frame'); r(hx + 5, hy + 4, 4, 4, 'lens'); r(hx + 7, hy + 5, 2, 2, 'eye'); r(hx + 1, hy + 4, 4, 1, 'frame'); }
-      if (P.shades) { r(hx + 3, hy + 3, 7, 4, 'frame'); r(hx + 1, hy + 3, 3, 1, 'frame'); r(hx + 4, hy + 4, 5, 2, 'lens'); r(hx + 5, hy + 4, 2, 1, 'hairH'); }   // black sunglasses with a glint
+      if (P.shades) { r(hx + 3, hy + 3, 7, 3, 'frame'); r(hx + 1, hy + 3, 3, 1, 'frame'); r(hx + 4, hy + 4, 5, 1, 'lens'); r(hx + 5, hy + 4, 2, 1, 'hairH'); }   // black sunglasses with a glint
       if (P.goatee) { r(hx + 5, hy + 6, 5, 1, 'stub'); r(hx + 5, hy + 9, 5, 2, 'stub'); }   // moustache + goatee
       if (hurt || shout) r(hx + 5, hy + 7, 4, 2, 'mouth'); else if (P.smile) { r(hx + 4, hy + 7, 6, 3, 'mouth'); r(hx + 5, hy + 7, 4, 2, 'white'); } else r(hx + 6, hy + 8, 3, 1, 'mouth'); }
     if (P.curly) { r(hx - 3, hy - 7, 16, 10, 'hair'); r(hx - 4, hy - 3, 3, 9, 'hair'); r(hx - 1, hy - 9, 4, 3, 'hair'); r(hx + 4, hy - 10, 4, 3, 'hair'); r(hx + 9, hy - 8, 4, 3, 'hair'); r(hx + 11, hy - 4, 2, 4, 'hair'); r(hx + 2, hy - 2, 8, 3, 'hair'); r(hx - 3, hy + 5, 3, 5, 'hair');
@@ -114,7 +114,8 @@ export function drawDetailed(c, f, force) {
       const ht = P.hairT ? 'hairT' : 'hair'; r(hx - 2, hy - 4, 13, 6, ht); r(hx + 1, hy - 5, 8, 1, ht); r(hx - 2, hy + 2, 4, 9, 'hair'); r(hx + 9, hy - 1, 2, 6, 'hair');
       if (!ol) { r(hx + 1, hy - 3, 6, 1, 'hairH'); r(hx - 1, hy + 3, 1, 6, 'hairH'); } } else if (P.wavy) {
       r(hx - 2, hy - 4, 13, 8, 'hair'); r(hx + 3, hy - 6, 7, 3, 'hair'); r(hx + 8, hy - 1, 3, 7, 'hair'); r(hx - 2, hy + 2, 3, 8, 'hair');
-      if (!ol) { r(hx + 1, hy - 4, 5, 1, 'hairH'); r(hx + 6, hy - 5, 3, 1, 'hairH'); r(hx + 9, hy + 1, 1, 4, 'hairH'); r(hx - 1, hy + 3, 1, 5, 'hairH'); } } else if (P.fade) { r(hx - 1, hy - 3, 12, 5, 'hair'); r(hx + 1, hy - 4, 8, 2, 'hair'); r(hx - 1, hy + 1, 3, 5, 'hairS'); r(hx + 9, hy + 1, 2, 4, 'hairS');   // short fade
+      if (!ol) { r(hx + 1, hy - 4, 5, 1, 'hairH'); r(hx + 6, hy - 5, 3, 1, 'hairH'); r(hx + 9, hy + 1, 1, 4, 'hairH'); r(hx - 1, hy + 3, 1, 5, 'hairH'); } } else if (P.crop) { r(hx - 1, hy - 3, 12, 4, 'hair'); r(hx + 1, hy - 4, 8, 1, 'hair'); r(hx - 1, hy + 1, 2, 3, 'hairS'); if (!ol) r(hx + 2, hy - 3, 5, 1, 'hairH');   // very short crop: forehead and face stay visible
+    } else if (P.fade) { r(hx - 1, hy - 3, 12, 5, 'hair'); r(hx + 1, hy - 4, 8, 2, 'hair'); r(hx - 1, hy + 1, 3, 5, 'hairS'); r(hx + 9, hy + 1, 2, 4, 'hairS');   // short fade
     } else if (P.bob) {
       r(hx - 2, hy - 4, 14, 6, 'hair'); r(hx - 4, hy, 5, 13, 'hair'); r(hx + 10, hy + 1, 2, 8, 'hair'); r(hx + 2, hy - 5, 7, 2, 'hair');
       if (!ol) { r(hx + 3, hy - 4, 6, 1, 'hairH'); r(hx - 3, hy + 3, 1, 8, 'hairH'); r(hx + 10, hy + 2, 1, 4, 'hairH'); } } else {
@@ -122,6 +123,8 @@ export function drawDetailed(c, f, force) {
     if (!ol) { r(hx + 3, hy - 5, 4, 1, 'hairH'); r(hx + 8, hy - 4, 2, 1, 'hairH'); r(hx + 1, hy - 2, 7, 1, 'hairH'); } }
     if (P.bare || P.noHoodie) r(nx - 3, ny - 1, 9, 3, P.neckKey || 'hood'); else { r(nx - Math.round(6 * W), ny, w12, 2, 'hoodD'); if (!ol) r(nx - Math.round(6 * W), ny, w12, 1, 'hoodDD'); }   // collar / neck
     if (P.crew) { r(nx - 3, ny - 1, 9, 2, 'hoodD'); if (!ol) { r(nx - 3, ny - 1, 9, 1, 'hoodL'); r(nx - 2, ny + 1, 7, 1, 'hoodDD'); } }   // crew-neck ribbed collar
+    if (P.collar) { r(nx - 3, ny - 1, 9, 3, 'hoodL'); r(nx + 1, ny - 1, 4, 3, 'skin'); r(nx + 2, ny + 2, 2, 1, 'skin'); if (!ol) { r(nx - 3, ny + 2, 4, 1, 'hoodDD'); r(nx + 4, ny + 2, 3, 1, 'hoodDD'); r(nx - 3, ny - 1, 1, 3, 'hoodD'); r(nx + 1, ny + 1, 1, 1, 'skinS'); } }   // open dress-shirt collar
+    if (P.placket && !ol) { r(nx + 3, ny + 3, 1, B.torso - 5, 'hoodD'); for (let q = 5; q < B.torso - 3; q += 4) r(nx + 3, ny + q, 1, 1, 'hoodDD'); }   // button placket
     if (P.capC) { r(hx - 2, hy - 5, 13, 6, 'capC'); r(hx - 1, hy - 6, 11, 1, 'capC'); r(hx + 8, hy - 1, 6, 2, 'capC');   // baseball cap, brim forward
       if (!ol) { r(hx - 1, hy - 5, 9, 1, 'capH'); r(hx + 8, hy - 1, 6, 1, 'capH'); r(hx - 2, hy, 10, 1, 'capD');
         for (const [gx, gy] of [[0, 0], [1, 0], [0, 1], [2, 1], [0, 2], [1, 2], [0, 3], [2, 3]]) r(hx + 6 + gx, hy - 5 + gy, 1, 1, 'gold'); } }   // gold R
