@@ -54,6 +54,16 @@ Object.assign(CHARACTERS, {
     light: { s: 3, a: 3, r: 6, dmg: 5, kb: 2.2, hs: 12, reach: 27, y: 14, h: 12, snd: 'light' },
     heavy: { s: 8, a: 4, r: 13, dmg: 10, kb: 5, hs: 21, reach: 34, y: 24, h: 14, snd: 'heavy' },
     special: { type: 'proj', s: 8, r: 18, dmg: 12, kb: 5, hs: 22, speed: 7, col: '#f80', size: 9, ball: true, snd: 'special' } }),   // chest pass
+  // Uncle Dandy: all-rounder with Mom's stats. Uber + basketball powers; special is a flurry of quick punches (like a pump-fake into jabs).
+  dandy: mk([6, 7, 8], { name: 'UNCLE DANDY', h: 62, w: 22, leg: 15, torso: 18, skin: '#c98f5f', hair: '#14110f', top: '#f4f4f6', topD: '#cfd0d8', pants: '#16161c', shoes: '#f2f2f2', style: 'short' }, {
+    light: { s: 4, a: 3, r: 8, dmg: 5, kb: 2.2, hs: 13, reach: 27, y: 14, h: 12, snd: 'light' },
+    heavy: { s: 9, a: 4, r: 15, dmg: 10, kb: 4.5, hs: 21, reach: 34, y: 24, h: 14, snd: 'heavy' },
+    special: { s: 4, a: 15, r: 14, dmg: 3, kb: 1, hs: 12, reach: 30, y: 14, h: 14, every: 3, jabs: true, snd: 'light' } }),   // quick punches
+  // Auntie Sheila: teacher. Quick and balanced (speed 9, attack 7, health 7). Special: throws a red-pen "F" test paper.
+  auntiesheila: mk([9, 7, 7], { name: 'AUNTIE SHEILA', h: 62, w: 20, leg: 15, torso: 18, skin: '#d9a47c', hair: '#4a2c20', top: '#f08aa8', topD: '#c8607e', pants: '#17171d', shoes: '#f2f2f2', style: 'straight', glasses: true, hood: false }, {
+    light: { s: 3, a: 3, r: 7, dmg: 5, kb: 2, hs: 13, reach: 27, y: 14, h: 12, snd: 'light' },
+    heavy: { s: 8, a: 4, r: 14, dmg: 10, kb: 4, hs: 20, reach: 34, y: 24, h: 14, snd: 'heavy' },
+    special: { type: 'proj', s: 9, r: 18, dmg: 12, kb: 4, hs: 22, speed: 6.5, col: '#ffffff', size: 12, slip: true, snd: 'special' } }),   // graded test paper
   // Sherell: same strength/speed/health as Esa. Music + acting powers: the special is a sonic scream.
   sherell: mk([6, 7, 7], { name: 'SHERELL', h: 58, w: 20, leg: 15, torso: 13, skin: '#c89468', hair: '#16110f', top: '#9b9ba3', topD: '#7b7b85', pants: '#4a72b0', shoes: '#f2edf4', style: 'straight' }, {
     light: { s: 5, a: 3, r: 9, dmg: 5, kb: 2, hs: 13, reach: 29, y: 12, h: 12, snd: 'light' },
@@ -102,9 +112,9 @@ Object.assign(CHARACTERS.edson, { detail: true, body: { leg: 15.4, arm: 15.4, to
   hood: '#2a2932', hoodL: '#403f4b', hoodD: '#1b1a21', hoodDD: '#121116', jean: '#2b2a34', jeanH: '#4a4856', jeanD: '#1a191f',
   gSky: '#9a99a2', gMtn: '#63636c', gLake: '#80808a', gPine: '#202027',
   red: '#18181e', blk: '#ece6da', sole: '#d9d1c2' } });
-// Kuya D: short fade, goatee, Bulls #23 jersey (sleeveless), white shorts with red trim, crew socks, red/white high-tops
-Object.assign(CHARACTERS.kuyad, { detail: true, body: { leg: 15.5, arm: 12.5, torso: 18, w: 1.3 }, pal: { ol: '#0b0a10', skin: '#d09a68', skinS: '#a8703f', hair: '#14110f', hairS: '#3a2c24', stub: '#3a2a22',
-  lowGuard: true, fade: true, goatee: true, smile: true, noHoodie: true, neckKey: 'skin', shortSleeve: true, sleeveless: true, jersey: true, shorts: '#ece9e9', shortsD: '#d3232b', shortsTrim: true, sock: true,
+// Kuya D: buzz cut, goatee, Bulls #23 jersey (sleeveless), white shorts with red trim, crew socks, red/white high-tops
+Object.assign(CHARACTERS.kuyad, { detail: true, body: { leg: 15.5, arm: 12.5, torso: 18, w: 1.3 }, pal: { ol: '#0b0a10', skin: '#d09a68', skinS: '#a8703f', hair: '#2a211c', hairS: '#4a3a30', stub: '#3a2a22',
+  lowGuard: true, buzz: true, goatee: true, smile: true, noHoodie: true, neckKey: 'skin', shortSleeve: true, sleeveless: true, jersey: true, shorts: '#ece9e9', shortsD: '#d3232b', shortsTrim: true, sock: true,
   hood: '#f4f2f2', hoodL: '#ffffff', hoodD: '#cfcaca', hoodDD: '#a8a2a2', trim: '#d3232b', sock: '#f4f2f2',
   red: '#c8202a', blk: '#f2eeee', sole: '#ffffff', white: '#ffffff', eye: '#15151c', mouth: '#7a3a2a' } });
 // Sherell: long straight black hair, glasses, grey tee with rainbow stripes, jeans, white sneakers
@@ -112,4 +122,14 @@ Object.assign(CHARACTERS.sherell, { detail: true, body: { leg: 13.5, arm: 10, to
   straight: true, glasses: true, frame: '#4a3f58', lens: '#d8d0e6', noHoodie: true, neckKey: 'skin', shortSleeve: true, rainbow: true,
   hood: '#9b9ba3', hoodL: '#b8b8c0', hoodD: '#7b7b85', hoodDD: '#5f5f68', jean: '#4a72b0', jeanH: '#7b9bd0', jeanD: '#31508a',
   red: '#f2edf4', blk: '#c4bace', sole: '#a89fb4', white: '#ffffff', eye: '#1b1214', mouth: '#b2574f' } });
+// Uncle Dandy: black sunglasses, short fade, big grin, white open-collar dress shirt, black jeans, white sneakers
+Object.assign(CHARACTERS.dandy, { detail: true, body: { leg: 15, arm: 12, torso: 18, w: 1 }, pal: { ol: '#07070c', skin: '#c98f5f', skinS: '#a06b40', hair: '#14110f', hairH: '#33302e',
+  lowGuard: true, noHoodie: true, neckKey: 'skin', collar: true, placket: true, crop: true, hairS: '#2a2422', smile: true, shades: true, frame: '#0a0a0e', lens: '#14141c',
+  hood: '#f4f4f6', hoodL: '#ffffff', hoodD: '#cfd0d8', hoodDD: '#a3a4b2', jean: '#16161c', jeanH: '#34343f', jeanD: '#0b0b10',
+  red: '#f2f2f2', blk: '#c9c9d2', sole: '#a8a8b4', white: '#ffffff', eye: '#15151c', mouth: '#7a3a2a' } });
+// Auntie Sheila: long straight dark-brown hair, teal-framed tinted glasses, pink blouse, gold chain, black slacks, white sneakers
+Object.assign(CHARACTERS.auntiesheila, { detail: true, body: { leg: 15, arm: 11.5, torso: 18, w: .85 }, pal: { ol: '#0b0a10', skin: '#d9a47c', skinS: '#b5805a', hair: '#4a2c20', hairH: '#7a4c34', hairE: '#5a3626', lowGuard: true,
+  straight: true, glasses: true, smile: true, zip: true, noHoodie: true, neckKey: 'skin', frame: '#2f9a98', lens: '#9a94bc', gold: '#e2b84a',
+  hood: '#f08aa8', hoodL: '#f9b0c6', hoodD: '#c8607e', hoodDD: '#9a3f5c', jean: '#17171d', jeanH: '#3a3a46', jeanD: '#0b0b10',
+  red: '#f2f2f2', blk: '#c9c9d2', sole: '#a8a8b4', white: '#ffffff', eye: '#15151c', mouth: '#a8504a' } });
 export const ROSTER = Object.keys(CHARACTERS);

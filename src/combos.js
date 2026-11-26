@@ -90,6 +90,20 @@ export const COMBOS = {
     { name: 'HARD PASS', seq: ['light', 'heavy', 'special'], dmg: 1.6, final: true, anim: 'rush', col: '#f80', fx: 'ball', shake: 8, stop: 9 },
   ] },
 
+  // Uncle Dandy: basketball + Uber
+  uncledandy: { combos: [
+    { name: 'BANK SHOT', seq: ['light', 'light', 'heavy'], dmg: 1.3, kb: 1.5, anim: 'flip', col: '#f80', fx: 'ball' },
+    { name: 'SAY UNCLE', seq: ['clight', 'light', 'heavy'], dmg: 1.5, launch: 6, final: true, anim: 'slam', lift: 14, col: '#fd5', fx: 'star', shake: 10, stop: 9 },
+    { name: 'UBER ATTACK', seq: ['light', 'heavy', 'special'], dmg: 1.6, final: true, anim: 'rush', col: '#ffffff', fx: 'pin', shake: 9, stop: 9 },
+  ] },
+
+  // Auntie Sheila: teaching
+  auntiesheila: { combos: [
+    { name: "TEACHER'S INTUITION", seq: ['light', 'light', 'heavy'], dmg: 1.3, kb: 1.4, anim: 'juke', col: '#6df', fx: 'star' },
+    { name: 'DETENTION', seq: ['clight', 'light', 'heavy'], dmg: 1.5, launch: 5, final: true, anim: 'slam', lift: 12, col: '#fd5', fx: 'dust', shake: 9, stop: 8 },
+    { name: "PRINCIPAL'S OFFICE", seq: ['light', 'heavy', 'special'], dmg: 1.6, final: true, anim: 'burst', col: '#e33', fx: 'star', shake: 10, stop: 10 },
+  ] },
+
   // Sherell: music + acting
   sherell: { combos: [
     { name: 'SONIC SCREAM', seq: ['light', 'light', 'special'], dmg: 1.5, final: true, anim: 'burst', col: '#6df', fx: 'note', shake: 6 },

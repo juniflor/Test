@@ -64,6 +64,7 @@ export function drawParticles(c, list) {
       case 'flame': c.fillRect(x - 2, y - 2, 4, 4); c.fillStyle = '#ffe27a'; c.fillRect(x - 1, y - 1, 2, 2); break;
       case 'dust': c.fillRect(x - 2, y - 2, 4, 3); break;
       case 'ball': c.fillRect(x - 2, y - 2, 5, 5); c.fillStyle = '#4a2008'; c.fillRect(x - 2, y, 5, 1); c.fillRect(x, y - 2, 1, 5); break;
+      case 'pin': c.fillRect(x - 2, y - 4, 5, 5); c.fillRect(x - 1, y + 1, 3, 2); c.fillStyle = '#000'; c.fillRect(x - 1, y - 3, 3, 3); break;   // Uber-style map pin
       case 'note': c.fillRect(x, y, 3, 2); c.fillRect(x + 2, y - 5, 1, 6); c.fillRect(x + 3, y - 5, 3, 1); break;
       default: c.fillRect(x, y, 3, 3); } }
   c.globalAlpha = 1;
